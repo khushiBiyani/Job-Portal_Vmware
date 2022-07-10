@@ -16,10 +16,19 @@ import { SetPopupContext } from "../App";
 
 import apiList from "../lib/apiList";
 import isAuth from "../lib/isAuth";
+import "./Login.css";
 
 const useStyles = makeStyles((theme) => ({
+  // backgroundImage:
+  //   "url('http://www.clker.com/cliparts/4/8/8/9/1516741003903724436woman-working-hard-clipart.hi.png')",
+  // height: "100vh",
+  // marginTop: "-70px",
+  // fontSize: "50px",
+  // backgroundSize: "cover",
+  // backgroundRepeat: "no-repeat",
   body: {
     padding: "60px 60px",
+    // backgroundImage: `url("")`,
   },
   inputBox: {
     width: "300px",

@@ -107,9 +107,9 @@ const JobTile = (props) => {
           <Grid item>
             <Typography variant="h5">{job.title}</Typography>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Rating value={job.rating !== -1 ? job.rating : null} readOnly />
-          </Grid>
+          </Grid> */}
           <Grid item>Role : {job.jobType}</Grid>
           <Grid item>Salary : &#8377; {job.salary} per month</Grid>
           <Grid item>
@@ -648,6 +648,7 @@ const Home = (props) => {
             <TextField
               label="Search Jobs"
               value={searchOptions.query}
+              // style={{ maxLength: "10px" }}
               onChange={(event) =>
                 setSearchOptions({
                   ...searchOptions,

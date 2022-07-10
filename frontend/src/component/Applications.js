@@ -54,66 +54,66 @@ const ApplicationTile = (props) => {
   const { application } = props;
   const setPopup = useContext(SetPopupContext);
   const [open, setOpen] = useState(false);
-  const [rating, setRating] = useState(application.job.rating);
+  // const [rating, setRating] = useState(application.job.rating);
 
   const appliedOn = new Date(application.dateOfApplication);
   const joinedOn = new Date(application.dateOfJoining);
 
-  const fetchRating = () => {
-    axios
-      .get(`${apiList.rating}?id=${application.job._id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        setRating(response.data.rating);
-        console.log(response.data);
-      })
-      .catch((err) => {
-        // console.log(err.response);
-        console.log(err.response.data);
-        setPopup({
-          open: true,
-          severity: "error",
-          message: "Error",
-        });
-      });
-  };
+  // const fetchRating = () => {
+  //   axios
+  //     .get(`${apiList.rating}?id=${application.job._id}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setRating(response.data.rating);
+  //       console.log(response.data);
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err.response);
+  //       console.log(err.response.data);
+  //       setPopup({
+  //         open: true,
+  //         severity: "error",
+  //         message: "Error",
+  //       });
+  //     });
+  // };
 
-  const changeRating = () => {
-    axios
-      .put(
-        apiList.rating,
-        { rating: rating, jobId: application.job._id },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        setPopup({
-          open: true,
-          severity: "success",
-          message: "Rating updated successfully",
-        });
-        fetchRating();
-        setOpen(false);
-      })
-      .catch((err) => {
-        // console.log(err.response);
-        console.log(err);
-        setPopup({
-          open: true,
-          severity: "error",
-          message: err.response.data.message,
-        });
-        fetchRating();
-        setOpen(false);
-      });
-  };
+  // const changeRating = () => {
+  //   axios
+  //     .put(
+  //       apiList.rating,
+  //       { rating: rating, jobId: application.job._id },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setPopup({
+  //         open: true,
+  //         severity: "success",
+  //         message: "Rating updated successfully",
+  //       });
+  //       fetchRating();
+  //       setOpen(false);
+  //     })
+  //     .catch((err) => {
+  //       // console.log(err.response);
+  //       console.log(err);
+  //       setPopup({
+  //         open: true,
+  //         severity: "error",
+  //         message: err.response.data.message,
+  //       });
+  //       fetchRating();
+  //       setOpen(false);
+  //     });
+  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -176,7 +176,7 @@ const ApplicationTile = (props) => {
                 color="primary"
                 className={classes.statusBlock}
                 onClick={() => {
-                  fetchRating();
+                  // fetchRating();
                   setOpen(true);
                 }}
               >
@@ -198,19 +198,19 @@ const ApplicationTile = (props) => {
             alignItems: "center",
           }}
         >
-          <Rating
+          {/* <Rating
             name="simple-controlled"
             style={{ marginBottom: "30px" }}
             value={rating === -1 ? null : rating}
             onChange={(event, newValue) => {
               setRating(newValue);
             }}
-          />
+          /> */}
           <Button
             variant="contained"
             color="primary"
             style={{ padding: "10px 50px" }}
-            onClick={() => changeRating()}
+            // onClick={() => changeRating()}
           >
             Submit
           </Button>

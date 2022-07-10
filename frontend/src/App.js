@@ -83,9 +83,9 @@ function App() {
               <Route exact path="/job/applications/:jobId">
                 <JobApplications />
               </Route>
-              <Route exact path="/employees">
+              {/* <Route exact path="/employees">
                 <AcceptedApplicants />
-              </Route>
+              </Route> */}
               <Route>
                 <ErrorPage />
               </Route>
