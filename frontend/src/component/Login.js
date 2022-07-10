@@ -27,14 +27,22 @@ const useStyles = makeStyles((theme) => ({
   // backgroundSize: "cover",
   // backgroundRepeat: "no-repeat",
   body: {
-    padding: "60px 60px",
-    // backgroundImage: `url("")`,
+    width: "400px",
+    marginLeft: "60px",
+    height: "80vh",
+    backgroundSize: "contain",
+    backgroundImage: `url("http://www.clker.com/cliparts/4/8/8/9/1516741003903724436woman-working-hard-clipart.hi.png")`,
+    backgroundRepeat: "no-repeat",
   },
   inputBox: {
     width: "300px",
   },
   submitButton: {
     width: "300px",
+  },
+  loginBox: {
+    marginTop: "80px",
+    marginRight: "100px",
   },
 }));
 
@@ -115,43 +123,50 @@ const Login = (props) => {
   return loggedin ? (
     <Redirect to="/" />
   ) : (
-    <Paper elevation={3} className={classes.body}>
-      <Grid container direction="column" spacing={4} alignItems="center">
-        <Grid item>
-          <Typography variant="h3" component="h2">
-            Login
-          </Typography>
-        </Grid>
-        <Grid item>
-          <EmailInput
-            label="Email"
-            value={loginDetails.email}
-            onChange={(event) => handleInput("email", event.target.value)}
-            inputErrorHandler={inputErrorHandler}
-            handleInputError={handleInputError}
-            className={classes.inputBox}
-          />
-        </Grid>
-        <Grid item>
-          <PasswordInput
-            label="Password"
-            value={loginDetails.password}
-            onChange={(event) => handleInput("password", event.target.value)}
-            className={classes.inputBox}
-          />
-        </Grid>
-        <Grid item>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleLogin()}
-            className={classes.submitButton}
-          >
-            Login
-          </Button>
-        </Grid>
+    <Grid container>
+      <Grid item xs={7} className={classes.body}></Grid>
+      <Grid item xs={3} className={classes.loginBox}>
+        <Paper elevation={3}>
+          <Grid container direction="column" spacing={4} alignItems="center">
+            <Grid item>
+              <Typography variant="h3" component="h2">
+                Login
+              </Typography>
+            </Grid>
+            <Grid item>
+              <EmailInput
+                label="Email"
+                value={loginDetails.email}
+                onChange={(event) => handleInput("email", event.target.value)}
+                inputErrorHandler={inputErrorHandler}
+                handleInputError={handleInputError}
+                className={classes.inputBox}
+              />
+            </Grid>
+            <Grid item>
+              <PasswordInput
+                label="Password"
+                value={loginDetails.password}
+                onChange={(event) =>
+                  handleInput("password", event.target.value)
+                }
+                className={classes.inputBox}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handleLogin()}
+                className={classes.submitButton}
+              >
+                Login
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
       </Grid>
-    </Paper>
+    </Grid>
   );
 };
 
