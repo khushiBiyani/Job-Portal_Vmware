@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   // backgroundRepeat: "no-repeat",
   body: {
     width: "400px",
-    marginLeft: "60px",
+    marginLeft: "120px",
     height: "80vh",
     backgroundSize: "contain",
     backgroundImage: `url("http://www.clker.com/cliparts/4/8/8/9/1516741003903724436woman-working-hard-clipart.hi.png")`,
@@ -124,7 +124,7 @@ const Login = (props) => {
     <Redirect to="/" />
   ) : (
     <Grid container>
-      <Grid item xs={7} className={classes.body}></Grid>
+      <Grid item xs={6} className={classes.body}></Grid>
       <Grid item xs={3} className={classes.loginBox}>
         <Paper elevation={3}>
           <Grid container direction="column" spacing={4} alignItems="center">
