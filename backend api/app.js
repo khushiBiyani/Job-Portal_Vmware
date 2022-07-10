@@ -7,13 +7,11 @@ const fs = require("fs");
 
 // MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/jobPortal", {
+  .connect("mongodb://localhost:27017/vmWareCodeHouse", {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    useUnifiedTopology: true
   })
-  .then((res) => console.log("Connected to DB"))
+  .then((res) => console.log("Connected to Mongo DB"))
   .catch((err) => console.log(err));
 
 // initialising directories
@@ -39,10 +37,10 @@ app.use(express.json());
 app.use(passportConfig.initialize());
 
 // Routing
-app.use("/auth", require("./routes/authRoutes"));
+app.use("/auth", require("./routes/authRouters"));
 app.use("/api", require("./routes/apiRoutes"));
-app.use("/upload", require("./routes/uploadRoutes"));
-app.use("/host", require("./routes/downloadRoutes"));
+app.use("/upload", require("./routes/uploadRouter"));
+app.use("/host", require("./routes/downloadRouter"));
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}!`);

@@ -1,15 +1,17 @@
 const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const authKeys = require("../lib/authKeys");
+const authKeys = {
+  jwtSecretKey: "jwt_secret",
+};
 
-const User = require("../db/User");
-const JobApplicant = require("../db/JobApplicant");
-const Recruiter = require("../db/Recruiter");
+const User = require("../Models/UserModel");
+const JobApplicant = require("../Models/JobApplicantModel");
+const Recruiter = require("../Models/RecruiterModel");
 
 const router = express.Router();
 
-router.post("/signup", (req, res) => {
+const signUp = (req, res) => {
   const data = req.body;
   let user = new User({
     email: data.email,
@@ -41,7 +43,7 @@ router.post("/signup", (req, res) => {
       userDetails
         .save()
         .then(() => {
-          // Token
+          
           const token = jwt.sign({ _id: user._id }, authKeys.jwtSecretKey);
           res.json({
             token: token,
@@ -63,9 +65,9 @@ router.post("/signup", (req, res) => {
     .catch((err) => {
       res.status(400).json(err);
     });
-});
+}
 
-router.post("/login", (req, res, next) => {
+const login =  (req, res, next) => {
   passport.authenticate(
     "local",
     { session: false },
@@ -85,6 +87,8 @@ router.post("/login", (req, res, next) => {
       });
     }
   )(req, res, next);
-});
+}
 
-module.exports = router;
+const Auth_Controller = { signUp, login };
+
+module.exports = Auth_Controller;

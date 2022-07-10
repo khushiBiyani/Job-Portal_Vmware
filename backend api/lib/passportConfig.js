@@ -5,8 +5,10 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
-const User = require("../db/User");
-const authKeys = require("./authKeys");
+const User = require("../Models/UserModel");
+const authKeys = {
+    jwtSecretKey: "jwt_secret",
+};
 
 const filterJson = (obj, unwantedKeys) => {
   const filteredObj = {};
