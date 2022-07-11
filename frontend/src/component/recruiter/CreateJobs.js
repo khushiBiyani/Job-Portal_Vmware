@@ -44,6 +44,7 @@ const CreateJobs = (props) => {
     jobType: "Full Time",
     duration: 0,
     salary: 0,
+    description: "",
   });
 
   const handleInput = (key, value) => {
@@ -78,6 +79,7 @@ const CreateJobs = (props) => {
           jobType: "Full Time",
           duration: 0,
           salary: 0,
+          description: "",
         });
       })
       .catch((err) => {
@@ -169,6 +171,8 @@ const CreateJobs = (props) => {
                     <MenuItem value="Full Time">Full Time</MenuItem>
                     <MenuItem value="Part Time">Part Time</MenuItem>
                     <MenuItem value="Work From Home">Work From Home</MenuItem>
+                    <MenuItem value="Mentor">Mentor</MenuItem>
+                    
                   </TextField>
                 </Grid>
                 <Grid item>
@@ -242,6 +246,21 @@ const CreateJobs = (props) => {
                       handleInput("maxPositions", event.target.value);
                     }}
                     InputProps={{ inputProps: { min: 1 } }}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    label="Job Description"
+                    multiline
+                    
+                    type="text"
+                    variant="outlined"
+                    value={jobDetails.description}
+                    onChange={(event) => {
+                      handleInput("description", event.target.value);
+                    }}
+                    
                     fullWidth
                   />
                 </Grid>

@@ -17,6 +17,7 @@ import AcceptedApplicants from "./component/recruiter/AcceptedApplicants";
 import RecruiterProfile from "./component/recruiter/Profile";
 import MessagePopup from "./lib/MessagePopup";
 import isAuth, { userType } from "./lib/isAuth";
+import Training from "./component/Training";
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -55,6 +56,7 @@ function App() {
               <Route exact path="/login">
                 <Login />
               </Route>
+              
               <Route exact path="/signup">
                 <Signup />
               </Route>
@@ -63,6 +65,9 @@ function App() {
               </Route>
               <Route exact path="/home">
                 <Home />
+              </Route>
+              <Route exact path="/training">
+                <Training />
               </Route>
               <Route exact path="/applications">
                 <Applications />

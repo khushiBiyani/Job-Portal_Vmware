@@ -56,6 +56,7 @@ const Navbar = (props) => {
               {/* <Button color="inherit" onClick={() => handleClick("/employees")}>
                 Employees
               </Button> */}
+
               <Button color="inherit" onClick={() => handleClick("/profile")}>
                 Profile
               </Button>
@@ -67,6 +68,9 @@ const Navbar = (props) => {
             <>
               <Button color="inherit" onClick={() => handleClick("/home")}>
                 Home
+              </Button>
+              <Button color="inherit" onClick={() => handleClick("/training")}>
+                Training
               </Button>
               <Button
                 color="inherit"

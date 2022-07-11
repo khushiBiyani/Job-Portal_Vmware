@@ -90,6 +90,7 @@ let schema = new mongoose.Schema(
     skillsets: [String],
     jobType: {
       type: String,
+      enum: ["Full Time", "Part Time", "Work From Home", "Contract", "Mentor"],
       required: true,
     },
     duration: {
@@ -128,6 +129,10 @@ let schema = new mongoose.Schema(
         msg: "Invalid rating",
       },
     },
+    description: {
+      type: String,
+      required: true,
+    }
   },
   { collation: { locale: "en" } }
 );

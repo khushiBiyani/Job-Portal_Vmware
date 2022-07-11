@@ -8,6 +8,7 @@ const Recruiter = require("../Models/RecruiterModel");
 const Job = require("../Models/JobModel");
 const Application = require("../Models/ApplicationModel");
 const Rating = require("../Models/RatingModel");
+const Training = require("../Models/TrainingModel");
 
 const router = express.Router();
 
@@ -37,6 +38,7 @@ const postJobs = (req, res) => {
     duration: data.duration,
     salary: data.salary,
     rating: data.rating,
+    description: data.description,
   });
 
   job
@@ -74,10 +76,25 @@ const getJobs = (req, res) => {
       ...findParams,
       title: {
         $regex: new RegExp(req.query.q, "i"),
-      },
+      }
     };
   }
-
+  if (req.query.skill) {
+    let skills = [];
+    req.query.skill.split(",").forEach((skill) => {
+      skills.push(skill.trim());
+    });
+    console.log("skills", skills);
+    
+    
+    findParams = {
+      ...findParams,
+      skillsets: {
+        
+        $in: skills,
+      }
+    }
+  }
   if (req.query.jobType) {
     let jobTypes = [];
     if (Array.isArray(req.query.jobType)) {
@@ -222,6 +239,139 @@ const getJobs = (req, res) => {
     });
 }
 
+  
+
+// to get all the jobs [pagination] [for recruiter personal and for everyone]
+const getTraining = (req, res) => {
+  let user = req.user;
+  // console.log(user);
+
+  let findParams = {};
+  let sortParams = {};
+
+  // const page = parseInt(req.query.page) ? parseInt(req.query.page) : 1;
+  // const limit = parseInt(req.query.limit) ? parseInt(req.query.limit) : 10;
+  // const skip = page - 1 >= 0 ? (page - 1) * limit : 0;
+
+  // to list down jobs posted by a particular recruiter
+  // if (user.type === "recruiter" && req.query.myjobs) {
+  //   findParams = {
+  //     ...findParams,
+  //     userId: user._id,
+  //   };
+  // }
+
+  if (req.query.q) {
+    findParams = {
+      ...findParams,
+      title: {
+        $regex: new RegExp(req.query.q, "i"),
+      }
+    };
+  }
+  if (req.query.skill) {
+    let skillset = [];
+    req.query.skill.split(",").forEach((skill) => {
+      skills.push(skill.trim());
+    });
+    console.log("skills", skillset);
+    
+    
+    findParams = {
+      ...findParams,
+      skills: {
+        
+        $in: skillset,
+      }
+    }
+  }
+  
+
+  
+
+  if (req.query.duration) {
+    findParams = {
+      ...findParams,
+      duration: {
+        $lt: parseInt(req.query.duration),
+      },
+    };
+  }
+
+  if (req.query.asc) {
+    if (Array.isArray(req.query.asc)) {
+      req.query.asc.map((key) => {
+        sortParams = {
+          ...sortParams,
+          [key]: 1,
+        };
+      });
+    } else {
+      sortParams = {
+        ...sortParams,
+        [req.query.asc]: 1,
+      };
+    }
+  }
+
+  if (req.query.desc) {
+    if (Array.isArray(req.query.desc)) {
+      req.query.desc.map((key) => {
+        sortParams = {
+          ...sortParams,
+          [key]: -1,
+        };
+      });
+    } else {
+      sortParams = {
+        ...sortParams,
+        [req.query.desc]: -1,
+      };
+    }
+  }
+
+  console.log(findParams);
+  console.log(sortParams);
+
+  // Job.find(findParams).collation({ locale: "en" }).sort(sortParams);
+  // .skip(skip)
+  // .limit(limit)
+
+  let arr = [
+    
+      
+    { $match: findParams },
+  ];
+
+  if (Object.keys(sortParams).length > 0) {
+    arr = [
+      
+      { $match: findParams },
+      {
+        $sort: sortParams,
+      },
+    ];
+  }
+
+  console.log(arr);
+
+  Training.aggregate(arr)
+    .then((posts) => {
+      console.log(posts);
+      if (posts == null) {
+        res.status(404).json({
+          message: "No training found",
+        });
+        return;
+      }
+      console.log(posts);
+      res.json(posts);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+}
+
 const getJobById = (req, res) => {
     Job.findOne({ _id: req.params.id })
       .then((job) => {
@@ -237,7 +387,6 @@ const getJobById = (req, res) => {
         res.status(400).json(err);
       });
 }
-  
 
 // to update info of a particular job
 const updateJobById = (req, res) => {
@@ -453,6 +602,16 @@ const updateUser = (req, res) => {
         if (data.profile) {
           jobApplicant.profile = data.profile;
         }
+        if (data.gapYearStart) {
+          jobApplicant.gapYearStart = data.gapYearStart;
+        }
+        if (data.gapYearEnd) {
+          jobApplicant.gapYearEnd = data.gapYearEnd;
+        }
+        if (data.gapReason) {
+          jobApplicant.gapReason = data.gapReason;
+        }
+
         console.log(jobApplicant);
         jobApplicant
           .save()
@@ -1331,8 +1490,37 @@ const getRating = (req, res) => {
   });
 }
 
+const postTraining = (req, res) => {
+  const data = req.body;
+  
+    // recruiter can add training
+    const training = new Training({
+      title: data.title,
+      description: data.description,
+      duration: data.duration,
+      location: data.location,
+      skills: data.skills,
+      link: data.link,
+    });
+  
+    training
+      .save()
+      .then((training) => {
+        res.json({
+          message: "Training added successfully",
+        });
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  
+  
+}
+
+
 // list of al the functions in this file
 const Api_Controller = {
+  postTraining,
     postJobs,
     getJobs,
     getJobById,
@@ -1348,7 +1536,8 @@ const Api_Controller = {
     updateApplicationById,
     updateRating,
     updateUser,
-    deleteJobById
+  deleteJobById,
+    getTraining,
 };
 
 module.exports = Api_Controller;

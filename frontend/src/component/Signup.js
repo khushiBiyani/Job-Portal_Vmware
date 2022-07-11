@@ -131,6 +131,9 @@ const Login = (props) => {
     profile: "",
     bio: "",
     contactNumber: "",
+    workGapStart: "",
+    workGapEnd: "",
+    workGapReason: "",
   });
 
   const [phone, setPhone] = useState("");
@@ -407,7 +410,44 @@ const Login = (props) => {
                   setSignupDetails({ ...signupDetails, skills: chips })
                 }
               />
-            </Grid>
+              </Grid>
+              <Grid item ls = {12}>
+              <TextField 
+                label="Gap Start Year"
+                value={signupDetails.gapStartYear}
+                variant="outlined"
+                type="number"
+                onChange={(event) => 
+                  setSignupDetails({ ...signupDetails, gapStartYear: event.target.value })
+                }
+                
+                />
+                
+            
+          
+            <TextField
+              label="Gap End Year"
+              value={signupDetails.gapStartYear}
+              variant="outlined"
+              type="number"
+              onChange={(event) => {
+                setSignupDetails({ ...signupDetails, gapEndYear: event.target.value });
+              }}
+            />
+              </Grid>
+              <Grid item>
+                <TextField 
+                  id="outlined-multiline-static"
+                    multiline
+                  label="Gap Reason"
+                  className={classes.inputBox}
+                    value={signupDetails.gapReason}
+                    variant="outlined"
+                    onChange={(event) => 
+                      setSignupDetails({ ...signupDetails, gapReason: event.target.value})
+                    }
+                    />
+                </Grid>
             <Grid item>
               <FileUploadInput
                 className={classes.inputBox}

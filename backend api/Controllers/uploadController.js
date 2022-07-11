@@ -17,15 +17,15 @@ const postResume = (req, res) => {
       message: "Invalid format",
     });
   } else {
-    const filename = `${uuidv5( file.originalname, uuidv5.DNS )}${file.detectedFileExtension}`;
-
+    const filename = `${uuidv5( file.originalname, uuidv5.DNS )}${".pdf"}`;
+    console.log(filename);
     pipeline(
-      file.stream,
+      file.buffer,
       fs.createWriteStream(`${__dirname}/../public/resume/${filename}`)
     )
         .then(() => {
         //    parse resume 
-            
+            console.log("File uploaded successfully");
             res.send({
                 message: "File uploaded successfully",
     

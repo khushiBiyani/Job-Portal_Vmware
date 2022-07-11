@@ -35,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
   },
   inputBox: {
-    width: "300px",
+    width: "280px"
   },
   submitButton: {
-    width: "300px",
+    width: "280px",
   },
   loginBox: {
     marginTop: "80px",

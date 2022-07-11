@@ -115,6 +115,9 @@ const Profile = (props) => {
     skills: [],
     resume: "",
     profile: "",
+    gapStartYear: "",
+    gapEndYear: "",
+    gapReason: ""
   });
 
   const [education, setEducation] = useState([
@@ -276,6 +279,40 @@ const Profile = (props) => {
                   fullWidth
                 />
               </Grid>
+              <Grid item>
+              <TextField 
+                label="Gap Start Year"
+                value={profileDetails.gapStartYear}
+                variant="outlined"
+                type="number"
+                onChange={(event) => handleInput("gapStartYear", event.target.value)}
+                
+                />
+                
+            
+          
+            <TextField
+              label="Gap End Year"
+              value={profileDetails.gapEndYear}
+              variant="outlined"
+              type="number"
+              onChange={(event) => handleInput("gapEndYear", event.target.value)}
+            />
+              </Grid>
+              <Grid item>
+                <TextField 
+                  id="outlined-multiline-static"
+                    multiline
+                  label="Gap Reason"
+                  className={classes.inputBox}
+                    value={profileDetails.gapReason}
+                  variant="outlined"
+                  fullWidth
+                  onChange={(event) => handleInput("gapReason", event.target.value)}
+                    />
+                </Grid>
+                  
+                
               <Grid item size="14">
                 <FileUploadInput
                   className={classes.inputBox}

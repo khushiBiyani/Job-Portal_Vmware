@@ -1,10 +1,20 @@
 import { useState, useEffect, useContext } from "react";
 import {
+  Button,
+  Chip,
   Grid,
   IconButton,
   InputAdornment,
+  makeStyles,
+  Paper,
   TextField,
   Typography,
+  Modal,
+  Slider,
+  FormControlLabel,
+  FormGroup,
+  MenuItem,
+  Checkbox,
 } from "@material-ui/core";
 
 import axios from "axios";
@@ -12,8 +22,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
 
-import FilterPopup from "./FilterPopup";
-import JobTile from "./JobTile";
+import FilterPopupTraining from "./FilterPopupTraining";
+import TrainingTile from "./TrainingTile";
 
 
 import { SetPopupContext } from "../App";
@@ -21,34 +31,19 @@ import { SetPopupContext } from "../App";
 import apiList from "../lib/apiList";
 
 
-const Home = (props) => {
-  const [jobs, setJobs] = useState([]);
+const Training = (props) => {
+  const [training, setTraining] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [searchOptions, setSearchOptions] = useState({
     query: "",
-    jobType: {
-      fullTime: false,
-      partTime: false,
-      wfh: false,
-      mentor: false,
-    },
-    salary: [0, 100],
     duration: "0",
     sort: {
-      salary: {
-        status: false,
-        desc: false,
-      },
       duration: {
         status: false,
         desc: false,
       },
-      rating: {
-        status: false,
-        desc: false,
       },
-    },
-    skills:[],
+    skills: [],
   });
   
 
@@ -62,36 +57,13 @@ const Home = (props) => {
     if (searchOptions.query !== "") {
       searchParams = [...searchParams, `q=${searchOptions.query}`];
     }
-    if (searchOptions.jobType.fullTime) {
-      searchParams = [...searchParams, `jobType=Full%20Time`];
-    }
-    if (searchOptions.jobType.partTime) {
-      searchParams = [...searchParams, `jobType=Part%20Time`];
-    }
-    if (searchOptions.jobType.wfh) {
-      searchParams = [...searchParams, `jobType=Work%20From%20Home`];
-    }
-    if (searchOptions.jobType.Mentor) {
-      searchParams = [...searchParams, `jobType=Mentor`];
-    }
-    if (searchOptions.skills.length > 0) {
-      searchParams = [...searchParams, `skill=${searchOptions.skills.join(",")}`];
-    }
-    if (searchOptions.salary[0] != 0) {
-      searchParams = [
-        ...searchParams,
-        `salaryMin=${searchOptions.salary[0] * 1000}`,
-      ];
-    }
-    if (searchOptions.salary[1] != 100) {
-      searchParams = [
-        ...searchParams,
-        `salaryMax=${searchOptions.salary[1] * 1000}`,
-      ];
-    }
+    
     if (searchOptions.duration != "0") {
       searchParams = [...searchParams, `duration=${searchOptions.duration}`];
-    }
+      }
+      if (searchOptions.skills.length > 0) {
+        searchParams = [...searchParams, `skill=${searchOptions.skills.join(",")}`];
+      }
 
     let asc = [],
       desc = [];
@@ -109,7 +81,7 @@ const Home = (props) => {
     searchParams = [...searchParams, ...asc, ...desc];
     const queryString = searchParams.join("&");
     console.log(queryString);
-    let address = apiList.jobs;
+    let address = apiList.training;
     if (queryString !== "") {
       address = `${address}?${queryString}`;
     }
@@ -122,16 +94,17 @@ const Home = (props) => {
       })
       .then((response) => {
         console.log(response.data);
-        setJobs(
+        setTraining(
           response.data.filter((obj) => {
-            const today = new Date();
-            const deadline = new Date(obj.deadline);
-            return deadline > today;
+           
+            return true;
           })
+          
         );
+        console.log(training);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err);
         setPopup({
           open: true,
           severity: "error",
@@ -158,12 +131,12 @@ const Home = (props) => {
         >
           <Grid item xs>
             <Typography variant="h2" font-family="Open Sans">
-              Jobs
+              Trainings
             </Typography>
           </Grid>
           <Grid item xs>
             <TextField
-              label="Search Jobs"
+              label="Search Trainings"
               value={searchOptions.query}
               // style={{ maxLength: "10px" }}
               onChange={(event) =>
@@ -205,13 +178,13 @@ const Home = (props) => {
           alignItems="stretch"
           justify="center"
         >
-          {jobs.length > 0 ? (
-            jobs.map((job) => {
-              return <JobTile job={job} />;
+          {training.length > 0 ? (
+            training.map((job) => {
+              return <TrainingTile training={job} />;
             })
           ) : (
             <Typography variant="h5" style={{ textAlign: "center" }}>
-              No jobs found
+              No Training found
             </Typography>
           )}
         </Grid>
@@ -219,7 +192,7 @@ const Home = (props) => {
           <Pagination count={10} color="primary" />
         </Grid> */}
       </Grid>
-      <FilterPopup
+      <FilterPopupTraining
         open={filterOpen}
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
@@ -234,4 +207,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default Training;
