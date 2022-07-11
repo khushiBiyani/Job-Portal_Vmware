@@ -41,7 +41,7 @@ const Welcome = (props) => {
       >
         <Grid item>
           <Typography variant="h2" align="center">
-            Welcome to Job Portal
+            Welcome to She Jobs
           </Typography>
         </Grid>
       </div>

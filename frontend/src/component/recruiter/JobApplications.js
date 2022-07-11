@@ -269,7 +269,7 @@ const FilterPopup = (props) => {
                 alignItems="center"
                 style={{ border: "1px solid #D1D1D1", borderRadius: "5px" }}
               >
-                <Grid item>
+                {/* <Grid item>
                   <Checkbox
                     name="rating"
                     checked={searchOptions.sort["jobApplicant.rating"].status}
@@ -287,13 +287,13 @@ const FilterPopup = (props) => {
                     }
                     id="rating"
                   />
-                </Grid>
-                <Grid item>
+                </Grid> */}
+                {/* <Grid item>
                   <label for="rating">
                     <Typography>Rating</Typography>
                   </label>
-                </Grid>
-                <Grid item>
+                </Grid> */}
+                {/* <Grid item>
                   <IconButton
                     disabled={!searchOptions.sort["jobApplicant.rating"].status}
                     onClick={() => {
@@ -316,7 +316,7 @@ const FilterPopup = (props) => {
                       <ArrowUpwardIcon />
                     )}
                   </IconButton>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid>
           </Grid>
@@ -564,7 +564,7 @@ const ApplicationTile = (props) => {
               {application.jobApplicant.name}
             </Typography>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Rating
               value={
                 application.jobApplicant.rating !== -1
@@ -573,7 +573,7 @@ const ApplicationTile = (props) => {
               }
               readOnly
             />
-          </Grid>
+          </Grid> */}
           <Grid item>Applied On: {appliedOn.toLocaleDateString()}</Grid>
           <Grid item>
             Education:{" "}
@@ -595,7 +595,7 @@ const ApplicationTile = (props) => {
           </Grid>
         </Grid>
         <Grid item container direction="column" xs={3}>
-          <Grid item>
+          {/* <Grid item>
             <Button
               variant="contained"
               className={classes.statusBlock}
@@ -604,7 +604,7 @@ const ApplicationTile = (props) => {
             >
               Download Resume
             </Button>
-          </Grid>
+          </Grid> */}
           <Grid item container xs>
             {buttonSet[application.status]}
           </Grid>

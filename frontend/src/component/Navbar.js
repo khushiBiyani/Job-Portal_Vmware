@@ -39,7 +39,7 @@ const Navbar = (props) => {
         }}
       >
         <Typography variant="h6" className={classes.title}>
-          Job Portal
+          She Jobs
         </Typography>
         {isAuth() ? (
           userType() === "recruiter" ? (

@@ -143,7 +143,7 @@ const CreateJobs = (props) => {
                     onAdd={(chip) =>
                       setJobDetails({
                         ...jobDetails,
-                        skillsets: [...jobDetails.skillsets, chip],
+                        skillsets: [...jobDetails.skillsets, chip.trim()],
                       })
                     }
                     onDelete={(chip, index) => {
@@ -172,7 +172,6 @@ const CreateJobs = (props) => {
                     <MenuItem value="Part Time">Part Time</MenuItem>
                     <MenuItem value="Work From Home">Work From Home</MenuItem>
                     <MenuItem value="Mentor">Mentor</MenuItem>
-                    
                   </TextField>
                 </Grid>
                 <Grid item>
@@ -253,14 +252,12 @@ const CreateJobs = (props) => {
                   <TextField
                     label="Job Description"
                     multiline
-                    
                     type="text"
                     variant="outlined"
                     value={jobDetails.description}
                     onChange={(event) => {
                       handleInput("description", event.target.value);
                     }}
-                    
                     fullWidth
                   />
                 </Grid>

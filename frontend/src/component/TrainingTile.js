@@ -24,7 +24,6 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import PopUpDescriptionTraining from "./TrainingInfo";
 import FilterPopup from "./FilterPopup";
 
-
 import { SetPopupContext } from "../App";
 
 import apiList from "../lib/apiList";
@@ -54,67 +53,58 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const TrainingTile = (props) => {
-    const classes = useStyles();
-    const { training } = props;
-    const setPopup = useContext(SetPopupContext);
-    const [popDescription, setPopDescription] = useState(
-      {
-        Title: "",
-        Description: "",
-        Location: "",
-        Duration: "",
-        Link: ""
-    }
-    );
-    const [popOpen, setPopOpen] = useState(false);
-  
-    const [open, setOpen] = useState(false);
-    const [sop, setSop] = useState("");
-  
-    const handleClose = () => {
-      setOpen(false);
-      setSop("");
-    };
-  
-    
-  
-    // const deadline = new Date(training.deadline).toLocaleDateString();
-  
-    return (
-      <Paper className={classes.trainingTileOuter} elevation={3}>
-        <Grid container>
-          <Grid container item xs={9} spacing={1} direction="column">
-            <Grid item>
-              <Typography variant="h5">{training.title}</Typography>
-            </Grid>
-            {/* <Grid item>
+  const classes = useStyles();
+  const { training } = props;
+  const setPopup = useContext(SetPopupContext);
+  const [popDescription, setPopDescription] = useState({
+    Title: "",
+    Description: "",
+    Location: "",
+    Duration: "",
+    Link: "",
+  });
+  const [popOpen, setPopOpen] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [sop, setSop] = useState("");
+
+  const handleClose = () => {
+    setOpen(false);
+    setSop("");
+  };
+
+  // const deadline = new Date(training.deadline).toLocaleDateString();
+
+  return (
+    <Paper className={classes.trainingTileOuter} elevation={3}>
+      <Grid container>
+        <Grid container item xs={9} spacing={1} direction="column">
+          <Grid item>
+            <Typography variant="h5">{training.title}</Typography>
+          </Grid>
+          {/* <Grid item>
               <Rating value={training.rating !== -1 ? training.rating : null} readOnly />
             </Grid> */}
-            <Grid item>Title : {training.title}</Grid>
-                    
-            
-            <Grid item>
-              Duration :{" "}
-              {training.duration !== 0 ? `${training.duration} month` : `Flexible`}
-            </Grid>
-                    
-            <Grid item>
-                Link : {training.link}
-            </Grid>
-            <Grid item>
-                Location : {training.location}
-            </Grid>
-            
-  
-            <Grid item>
-              {training.skills.map((skill) => (
-                <Chip label={skill} style={{ marginRight: "2px" }} />
-              ))}
-            </Grid>
+          <Grid item>Title : {training.title}</Grid>
+
+          <Grid item>
+            Duration :{" "}
+            {training.duration !== 0
+              ? `${training.duration} month`
+              : `Flexible`}
           </Grid>
-          <Grid item xs={3}>
+
+          <Grid item>Link : {training.link}</Grid>
+          <Grid item>Location : {training.location}</Grid>
+
+          <Grid item>
+            {training.skills.map((skill) => (
+              <Chip label={skill} style={{ marginRight: "2px" }} />
+            ))}
+          </Grid>
+        </Grid>
+        {/* <Grid item xs={3}>
 
           <Button
               variant="contained"
@@ -149,44 +139,43 @@ const TrainingTile = (props) => {
               View Details
             </Button>
             
-          </Grid>
-        </Grid>
-        <PopUpDescriptionTraining
-          trainingDetails = {popDescription}
-          open={popOpen}
-          handleClose={() => setPopOpen(false)
-          }
-          />
-        <Modal open={open} onClose={handleClose} className={classes.popupDialog}>
-          <Paper
-            style={{
-              padding: "20px",
-              outline: "none",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              minWidth: "50%",
-              alignItems: "center",
+          </Grid> */}
+      </Grid>
+      <PopUpDescriptionTraining
+        trainingDetails={popDescription}
+        open={popOpen}
+        handleClose={() => setPopOpen(false)}
+      />
+      <Modal open={open} onClose={handleClose} className={classes.popupDialog}>
+        <Paper
+          style={{
+            padding: "20px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            minWidth: "50%",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            label="Write SOP (upto 250 words)"
+            multiline
+            rows={8}
+            style={{ width: "100%", marginBottom: "30px" }}
+            variant="outlined"
+            value={sop}
+            onChange={(event) => {
+              if (
+                event.target.value.split(" ").filter(function (n) {
+                  return n != "";
+                }).length <= 250
+              ) {
+                setSop(event.target.value);
+              }
             }}
-          >
-            <TextField
-              label="Write SOP (upto 250 words)"
-              multiline
-              rows={8}
-              style={{ width: "100%", marginBottom: "30px" }}
-              variant="outlined"
-              value={sop}
-              onChange={(event) => {
-                if (
-                  event.target.value.split(" ").filter(function (n) {
-                    return n != "";
-                  }).length <= 250
-                ) {
-                  setSop(event.target.value);
-                }
-              }}
-            />
-            {/* <Button
+          />
+          {/* <Button
               variant="contained"
               color="primary"
               style={{ padding: "10px 50px" }}
@@ -194,11 +183,10 @@ const TrainingTile = (props) => {
             >
               Submit
             </Button> */}
-          </Paper>
-        </Modal>
-      </Paper>
-    );
-  };
+        </Paper>
+      </Modal>
+    </Paper>
+  );
+};
 
-
-  export default TrainingTile;
+export default TrainingTile;

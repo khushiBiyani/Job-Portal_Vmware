@@ -117,7 +117,7 @@ const Profile = (props) => {
     profile: "",
     gapStartYear: "",
     gapEndYear: "",
-    gapReason: ""
+    gapReason: "",
   });
 
   const [education, setEducation] = useState([
@@ -280,40 +280,42 @@ const Profile = (props) => {
                 />
               </Grid>
               <Grid item>
-              <TextField 
-                label="Gap Start Year"
-                value={profileDetails.gapStartYear}
-                variant="outlined"
-                type="number"
-                onChange={(event) => handleInput("gapStartYear", event.target.value)}
-                
+                <TextField
+                  label="Gap Start Year"
+                  value={profileDetails.gapStartYear}
+                  variant="outlined"
+                  type="number"
+                  onChange={(event) =>
+                    handleInput("gapStartYear", event.target.value)
+                  }
                 />
-                
-            
-          
-            <TextField
-              label="Gap End Year"
-              value={profileDetails.gapEndYear}
-              variant="outlined"
-              type="number"
-              onChange={(event) => handleInput("gapEndYear", event.target.value)}
-            />
+
+                <TextField
+                  label="Gap End Year"
+                  value={profileDetails.gapEndYear}
+                  variant="outlined"
+                  type="number"
+                  onChange={(event) =>
+                    handleInput("gapEndYear", event.target.value)
+                  }
+                />
               </Grid>
               <Grid item>
-                <TextField 
+                <TextField
                   id="outlined-multiline-static"
-                    multiline
+                  multiline
                   label="Gap Reason"
                   className={classes.inputBox}
-                    value={profileDetails.gapReason}
+                  value={profileDetails.gapReason}
                   variant="outlined"
                   fullWidth
-                  onChange={(event) => handleInput("gapReason", event.target.value)}
-                    />
-                </Grid>
-                  
-                
-              <Grid item size="14">
+                  onChange={(event) =>
+                    handleInput("gapReason", event.target.value)
+                  }
+                />
+              </Grid>
+
+              {/* <Grid item size="14">
                 <FileUploadInput
                   className={classes.inputBox}
                   label="Resume (pdf form)"
@@ -322,7 +324,7 @@ const Profile = (props) => {
                   handleInput={handleInput}
                   identifier={"resume"}
                 />
-              </Grid>
+              </Grid> */}
               {/* <Grid item>
                 <FileUploadInput
                   className={classes.inputBox}
