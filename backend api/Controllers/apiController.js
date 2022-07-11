@@ -602,14 +602,12 @@ const updateUser = (req, res) => {
         if (data.profile) {
           jobApplicant.profile = data.profile;
         }
-        if (data.gapYearStart) {
-          jobApplicant.gapYearStart = data.gapYearStart;
+        if (data.workGapYear) {
+          jobApplicant.gapYear = data.data.workGapYear;
         }
-        if (data.gapYearEnd) {
-          jobApplicant.gapYearEnd = data.gapYearEnd;
-        }
-        if (data.gapReason) {
-          jobApplicant.gapReason = data.gapReason;
+        
+        if (data.workGapReason) {
+          jobApplicant.gapReason = data.workGapReason;
         }
 
         console.log(jobApplicant);

@@ -115,8 +115,7 @@ const Profile = (props) => {
     skills: [],
     resume: "",
     profile: "",
-    gapStartYear: "",
-    gapEndYear: "",
+    gapYear: "",
     gapReason: "",
   });
 
@@ -281,24 +280,16 @@ const Profile = (props) => {
               </Grid>
               <Grid item>
                 <TextField
-                  label="Gap Start Year"
-                  value={profileDetails.gapStartYear}
+                  label="Gap Year"
+                  value={profileDetails.gapYear}
                   variant="outlined"
                   type="number"
                   onChange={(event) =>
-                    handleInput("gapStartYear", event.target.value)
+                    handleInput("gapYear", event.target.value)
                   }
                 />
 
-                <TextField
-                  label="Gap End Year"
-                  value={profileDetails.gapEndYear}
-                  variant="outlined"
-                  type="number"
-                  onChange={(event) =>
-                    handleInput("gapEndYear", event.target.value)
-                  }
-                />
+                
               </Grid>
               <Grid item>
                 <TextField

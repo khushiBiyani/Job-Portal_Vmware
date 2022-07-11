@@ -131,8 +131,7 @@ const Login = (props) => {
     profile: "",
     bio: "",
     contactNumber: "",
-    workGapStart: "",
-    workGapEnd: "",
+    workGap: 0,
     workGapReason: "",
   });
 
@@ -222,6 +221,7 @@ const Login = (props) => {
     });
 
     if (verified) {
+      console.log(updatedDetails);
       axios
         .post(apiList.signup, updatedDetails)
         .then((response) => {
@@ -411,32 +411,22 @@ const Login = (props) => {
                 }
               />
             </Grid>
-            <Grid item ls={12}>
+            <Grid item >
               <TextField
-                label="Gap Start Year"
-                value={signupDetails.gapStartYear}
+                label="Gap Year"
+                  value={signupDetails.workGap}
                 variant="outlined"
-                type="number"
+                  type="number"
+                  fullWidth
                 onChange={(event) =>
                   setSignupDetails({
                     ...signupDetails,
-                    gapStartYear: event.target.value,
+                    workGap: event.target.value,
                   })
                 }
               />
 
-              <TextField
-                label="Gap End Year"
-                value={signupDetails.gapStartYear}
-                variant="outlined"
-                type="number"
-                onChange={(event) => {
-                  setSignupDetails({
-                    ...signupDetails,
-                    gapEndYear: event.target.value,
-                  });
-                }}
-              />
+              
             </Grid>
             <Grid item>
               <TextField
@@ -444,12 +434,12 @@ const Login = (props) => {
                 multiline
                 label="Gap Reason"
                 className={classes.inputBox}
-                value={signupDetails.gapReason}
+                value={signupDetails.workGapReason}
                 variant="outlined"
                 onChange={(event) =>
                   setSignupDetails({
                     ...signupDetails,
-                    gapReason: event.target.value,
+                    workGapReason: event.target.value,
                   })
                 }
               />

@@ -56,15 +56,8 @@ let schema = new mongoose.Schema(
     profile: {
       type: String,
     },
-    gapStartYear: {
-      type: Number,
-      min: 1930,
-      max: new Date().getFullYear(),
-    },
-    gapStartYear: {
-      type: Number,
-      min: 1930,
-      max: new Date().getFullYear(),
+    gapYear: {
+      type: String,
     },
     gapReason: {
       type: String,

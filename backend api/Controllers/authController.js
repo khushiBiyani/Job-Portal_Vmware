@@ -18,6 +18,7 @@ const signUp = (req, res) => {
     password: data.password,
     type: data.type,
   });
+  console.log(data);
 
   user
     .save()
@@ -37,7 +38,9 @@ const signUp = (req, res) => {
               skills: data.skills,
               rating: data.rating,
               resume: data.resume,
-              profile: data.profile,
+            profile: data.profile,
+            gapYear: data.workGap,
+            gapReason: data.workGapReason,
             });
 
       userDetails
