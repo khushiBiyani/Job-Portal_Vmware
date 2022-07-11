@@ -147,7 +147,7 @@ const JobTile = (props) => {
           >
             Apply
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             className={classes.button}
@@ -163,7 +163,7 @@ const JobTile = (props) => {
             }}
           >
             View Details
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
       <PopUpDescription
