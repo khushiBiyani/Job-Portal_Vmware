@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 export const SetPopupContext = createContext();
 
 function App() {
+  console.log(userType());
   const classes = useStyles();
   const [popup, setPopup] = useState({
     open: false,
@@ -56,7 +57,7 @@ function App() {
               <Route exact path="/login">
                 <Login />
               </Route>
-              
+
               <Route exact path="/signup">
                 <Signup />
               </Route>
