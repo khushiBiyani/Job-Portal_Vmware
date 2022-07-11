@@ -23,8 +23,10 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
 
 const useStyles = makeStyles((theme) => ({
+  //  set background color of popup to light blue
   body: {
     height: "inherit",
+    
   },
   button: {
     width: "100%",
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#F5F5F3",
   },
 }));
 
